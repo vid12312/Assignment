@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { produce } from 'immer';
+import { Link } from 'react-router-dom';
 import { Form, submitLoadingClass } from '../../components/form/form';
 import { addUserAction } from '../../store/actions/user';
 import { checkValidity } from '../../shared/shared';
@@ -8,7 +9,6 @@ import { checkValidity } from '../../shared/shared';
 
 interface Props {
     onUserAddition: any;
-    // error: any;
 }
 
 class HomePage extends Component<Props> {
@@ -49,7 +49,7 @@ class HomePage extends Component<Props> {
                     warning: 'Enter Age.',
                     help: ''
                 },
-                value:0 ,
+                value:'' ,
                 validation: {
                     required: true
                 },
@@ -188,7 +188,7 @@ class HomePage extends Component<Props> {
 
         this.props.onUserAddition( 
             this.state.userForm.name.value,
-            this.state.userForm.age.value,
+            Number(this.state.userForm.age.value),
             this.state.userForm.gender.value,
             this.state.userForm.email.value,
             this.state.userForm.contact.value,
@@ -202,10 +202,8 @@ class HomePage extends Component<Props> {
         return (
             <div className="ui grid">
                 <div className="row">
-                    <div className="three wide column">
-                        
-                    </div>
-                    <div className="center aligned ten wide column">
+                    <div className="two wide column"></div>
+                    <div className="center aligned twelve wide column">
                         <h3>User Form</h3>
                         <Form 
                             formConfig={this.state.userForm }
@@ -216,9 +214,14 @@ class HomePage extends Component<Props> {
                             // errorMessage={(this.props.error)? this.props.error.pretty : null}
                             onKeyPress={this.onKeyPress}/>
                     </div>
-                    <div className="three wide column">
-                        
+                    <div className="two wide column"></div>
+                </div>
+                <div className="row">
+                    <div className="two wide column"></div>
+                    <div className="center aligned twelve wide column">
+                        <Link to = {'/user'} className="item">View User Details</Link>
                     </div>
+                    <div className="two wide column"></div>
                 </div>
             </div>
         );
